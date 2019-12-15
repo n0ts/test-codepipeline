@@ -5,7 +5,7 @@ phases:
     runtime-versions:
       docker: 18
     commands:
-      - if [ -e /tmp/node_modules.tar ]; then tar xf /tmp/node_modules.tar; fi
+      - docker info
 
   pre_build:
     commands:
@@ -24,13 +24,3 @@ phases:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
-
-artifacts:
-  files:
-    - '**/*'
-  base-directory: dist
-
-cache:
-  paths:
-    - /tmp/node_modules.tar
-
